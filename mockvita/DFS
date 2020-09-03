@@ -1,0 +1,54 @@
+#include<iostream>
+#include<vector>
+#include<stack>
+using namespace std;
+struct Edge
+{
+	int src;
+	int dest;
+	int weight;
+};
+class Graph
+{
+	public:	
+	vector<vector<int>>adjlist;
+	Graph(vector<Edge>&edges,int N)
+	{
+		adjlist.resize(N);
+		for(auto edge:edges)
+		{
+			adjlist[edge.src].push_back(edge.dest);
+		}
+	}
+};
+void DFS(Graph graph,int N)
+{
+	vector<bool>visited(N,false);
+	int v=3;
+	visited[v]=true;
+	stack<int>q;
+	q.push(v);
+	
+	while(!q.empty())
+	{
+		v=q.top();
+		q.pop();
+		cout<<v<<" ";
+		for(int u:graph.adjlist[v])
+		{
+			if(!visited[u])
+			{
+				visited[u]=true;
+				q.push(u);
+			}
+		}
+	}
+}
+int main()
+{
+	vector<Edge>edges={{0,1},{1,2},{2,0},{2,1},{3,2},{4,5},{5,4}};
+	int N=6;
+	Graph graph(edges,N);
+	DFS(graph,N);
+	
+}

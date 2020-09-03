@@ -1,0 +1,25 @@
+#include<iostream>
+#include<unordered_map>
+using namespace std;
+void FindPair(int *a,int n,int sum)
+{
+	unordered_map<int,int>map;
+	cout<<map.end();
+	for(int i=0;i<n;i++)
+	{
+		if(map.find(sum-a[i])!=map.end())
+		{
+			cout<<"Pair Found at Index "<<map[sum-a[i]]<<" "<<i<<endl;
+			break;
+		}
+		map[a[i]]=i;
+	}
+}
+int main()
+{
+	int arr[]={8,7,2,5,3,1};
+	int n=sizeof(arr)/sizeof(arr[0]);
+	int sum=10;
+	
+	FindPair(arr,n,sum);
+}

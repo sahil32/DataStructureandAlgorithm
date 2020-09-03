@@ -1,0 +1,42 @@
+#include<iostream>
+#include<unordered_map>
+using namespace std;
+void CustomSort(int *a,int *b,int m,int n)
+{
+	unordered_map<int,int>map;
+	
+	for(int i=0;i<m;i++)
+	++map[a[i]];
+	
+	int index=0;
+	for(int i=0;i<n;i++)
+	{
+		while(map[b[i]])
+		{
+			a[index++]=b[i];
+			--map[b[i]];
+		}
+		map.erase(b[i]);
+	}
+	int i=index;
+	
+	for(auto it=map.begin();it!=map.end();++it)
+	{
+		while(it->secod--)
+		{
+			a[index++]=it->first;
+		}
+	}
+	
+	sort(a+i,a+index);
+}
+int main()
+{
+	int arr1[]={5,8,9,3,5,7,1,3,4,9,3,5,1,8,4};
+	int arr2[]={3,5,7,2};
+	
+	int m=sizeof(arr1)/sizeof(arr1[0]);
+	int n=sizeof(arr2)/sizeof(arr2[0]);
+	
+	CustomSort(arr1,arr2,m,n);
+}

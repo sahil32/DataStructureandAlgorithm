@@ -1,0 +1,48 @@
+#include<iostream>
+#include<unordered_map>
+#include<vector>
+using namespace std;
+#define N 100
+struct Edge
+{
+	int src;
+	int dest;
+};
+void Solution(unordered_map<int,int>&ladder,unordered_map<int,int>&snake)
+{
+	vector<Edge>edges;
+	
+	for(int i=0;i<N;i++)
+	{
+		for(int j=1;j<=6 && i+j<=N;j++)
+		{
+			int src=i;
+			int dest=(ladder[i+j]||snake[i+j])?(ladder[i+j]+snake[i+j]):(i+j);
+			Edge e={i,j};
+			edges.push_back(e);
+		}
+	}
+}
+int main()
+{
+	unordered_map<int,int>ladder,snake;
+	ladder[4]=14;
+	ladder[9]=31;
+	ladder[20]=38;
+	ladder[28]=84;
+	ladder[40]=59;
+	ladder[51]=67;
+	ladder[63]=81;
+	ladder[71]=91;
+	
+	snake[99]=78;
+	snake[95]=75;
+	snake[93]=73;
+	snake[87]=24;
+	snake[64]=60;
+	snake[62]=19;
+	snake[54]=34;
+	snake[17]=7;
+	
+	Solution(ladder,snake);
+}
